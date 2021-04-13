@@ -1,7 +1,22 @@
+document.getElementById("load").onclick = function(){
+    const value = document.getElementById("product-id").value;
+    if(value === ""){
+        axios.get('/api/products').then(addList);//bring all results
+    }else{
+        axios
+            .get(`/api/products/${value}`)
+            .then(addSingle)
+            .catch((err) => {
+                if(err.response.status === 404){
+                    notFound();
+                }
+            });//find one product
+    }
+    
+};
 
 function addList({ data }) {
   resetContentArea();
-
   const template = document.querySelector("#list-result");
   const clone = template.content.cloneNode(true);
 
