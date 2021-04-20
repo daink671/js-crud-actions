@@ -1,0 +1,14 @@
+[
+    {
+        "title": "007 Casino Royale",
+        "director": "someone",
+        "price": 5,
+        "rate": 3
+    },
+    {
+        "title": "007 Quantum of Solace",
+        "director": "somebodye",
+        "price": 5,
+        "rate": 3
+    }
+]

@@ -3,26 +3,21 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
+
 const low = require("lowdb");
 const lodashId = require("lodash-id");
 const FileSync = require("lowdb/adapters/FileSync");
 const mongoose = require('mongoose');
 const {MongoClient} = require('mongodb');
-
+const models = require('./models/movie');
+const data = require('./movies.json');
+const assert = require('assert');
 
 const adapter = new FileSync("db.json");
 const db = low(adapter);
 db._.mixin(lodashId);
 db.defaults({ products: [] });
 
-
-// const dotenv = require('dotenv');
-// dotenv.config();
-// const dbURI = process.env.DB_URL;
-
-// mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
-//         .then((result) => console.log('connected to db'))
-//         .catch((err) => console.log(err));
 
 async function main(){
 
@@ -35,12 +30,18 @@ async function main(){
     try {
         // Connect to the MongoDB cluster
         await client.connect();
- 
+        
+        const results = await models.loadData(data);
+        assert.equal(data.length, results.insertedCount);
+        
+        
         // Make the appropriate DB calls
         await  listDatabases(client);
- 
+        
     } catch (e) {
         console.error(e);
+    } finally {
+        await client.close();
     }
 }
 
