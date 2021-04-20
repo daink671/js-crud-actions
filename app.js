@@ -6,11 +6,52 @@ var logger = require("morgan");
 const low = require("lowdb");
 const lodashId = require("lodash-id");
 const FileSync = require("lowdb/adapters/FileSync");
+const mongoose = require('mongoose');
+const {MongoClient} = require('mongodb');
+
 
 const adapter = new FileSync("db.json");
 const db = low(adapter);
 db._.mixin(lodashId);
 db.defaults({ products: [] });
+
+
+// const dotenv = require('dotenv');
+// dotenv.config();
+// const dbURI = process.env.DB_URL;
+
+// mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
+//         .then((result) => console.log('connected to db'))
+//         .catch((err) => console.log(err));
+
+async function main(){
+
+    const dotenv = require('dotenv');
+    dotenv.config();
+    const dbURI = process.env.DB_URL;
+
+    const client = new MongoClient(dbURI);
+ 
+    try {
+        // Connect to the MongoDB cluster
+        await client.connect();
+ 
+        // Make the appropriate DB calls
+        await  listDatabases(client);
+ 
+    } catch (e) {
+        console.error(e);
+    }
+}
+
+main().catch(console.error);
+
+async function listDatabases(client){
+    databasesList = await client.db().admin().listDatabases();
+ 
+    console.log("Databases:");
+    databasesList.databases.forEach(db => console.log(` - ${db.name}`));
+};
 
 var apiRouter = require("./routes/api")(db);
 var clientRouter = require("./routes/client");
