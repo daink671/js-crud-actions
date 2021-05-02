@@ -3,10 +3,12 @@ var router = express.Router();
 
 router.get("/", function (req, res) {
   res.sendFile("read.html", { root: "views" });
+  
 });
 
 router.get("/read", function (req, res) {
   res.sendFile("read.html", { root: "views" });
+  router.get('/movies', movieCtrl.getMovies);
 });
 
 router.get("/create", function (req, res) {

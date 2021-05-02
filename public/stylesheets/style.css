@@ -2,7 +2,7 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   display: flex;
   flex-direction: column;
-  color: #223640;
+  color: #96dcff;
 }
 
 a {
@@ -19,23 +19,23 @@ h1 {
 }
 
 .orange {
-  color: #c74b35;
+  color: #ff9c8b;
 }
 
 .brown {
-  color: #825e43;
+  color: #ffcaa2;
 }
 
 .dark-green {
-  color: #356337;
+  color: #305732;
 }
 
 .green {
-  color: #a2c54c;
+  color: #e8ffae;
 }
 
 .dark-blue {
-  color: #223640;
+  color: #46a8da;
 }
 
 .light-blue {
@@ -43,13 +43,13 @@ h1 {
 }
 
 .gray {
-  color: #a0a0a0;
+  color: #636363;
 }
 
 nav {
   width: 100%;
   float: left;
-  background: #223640;
+  background: #1a2c35;
   color: white;
 }
 
@@ -68,7 +68,7 @@ nav > ul > li {
 }
 
 nav > ul > li.active {
-  color: #ff9629;
+  color: #ffa13c;
 }
 
 nav > ul > li > a {

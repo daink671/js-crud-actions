@@ -19,40 +19,40 @@ db._.mixin(lodashId);
 db.defaults({ products: [] });
 
 
-async function main(){
+// async function main(){
 
-    const dotenv = require('dotenv');
-    dotenv.config();
-    const dbURI = process.env.DB_URL;
+//     const dotenv = require('dotenv');
+//     dotenv.config();
+//     const dbURI = process.env.DB_URL;
 
-    const client = new MongoClient(dbURI);
+//     const client = new MongoClient(dbURI);
  
-    try {
-        // Connect to the MongoDB cluster
-        await client.connect();
+//     try {
+//         // Connect to the MongoDB cluster
+//         await client.connect();
         
-        const results = await models.loadData(data);
-        assert.equal(data.length, results.insertedCount);
+//         const results = await models.loadData(data);
+//         assert.equal(data.length, results.insertedCount);
         
         
-        // Make the appropriate DB calls
-        await  listDatabases(client);
+//         // Make the appropriate DB calls
+//         await  listDatabases(client);
         
-    } catch (e) {
-        console.error(e);
-    } finally {
-        await client.close();
-    }
-}
+//     } catch (e) {
+//         console.error(e);
+//     } finally {
+//         await client.close();
+//     }
+// }
 
-main().catch(console.error);
+// main().catch(console.error);
 
-async function listDatabases(client){
-    databasesList = await client.db().admin().listDatabases();
+// async function listDatabases(client){
+//     databasesList = await client.db().admin().listDatabases();
  
-    console.log("Databases:");
-    databasesList.databases.forEach(db => console.log(` - ${db.name}`));
-};
+//     console.log("Databases:");
+//     databasesList.databases.forEach(db => console.log(` - ${db.name}`));
+// };
 
 var apiRouter = require("./routes/api")(db);
 var clientRouter = require("./routes/client");
